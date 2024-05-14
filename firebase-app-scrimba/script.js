@@ -1,21 +1,39 @@
+// html element ref
+const addToCratBtnEle = document.getElementById('addToCartBtn');
+const itemInputEle = document.getElementById("itemInput");
+const itemsContainerEle = document.querySelector('.items-container');
 
-import { initializeApp  } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js';
-import { getDatabase, ref, push } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js'
+// importing firebase function 
+import { initializeApp  } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js'
+import { getDatabase, ref, push  } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js'
 
 
+// firebase 
 const appSettings = {
-    databaseURL : "https://playground-1821f-default-rtdb.firebaseio.com/"
+    databaseURL : "https://cart-database-8618b-default-rtdb.firebaseio.com/",
 }
 
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
-const itemsInDB = ref(database, "cartItems")
+const shopingListAppDB = ref(database, "shopingListApp");
 
+function removeItem(uniqeID = ""){
+    const ele = document.querySelector(`.${uniqeID}`);
+        const sure = confirm("Are you sure wanna delete this?")
+        sure ? ele.remove() : null;
+}
 
+function makeHTML (txt) {
+    const uniqeID = `item-${Math.floor(Math.random() * 100000)}`;
+    const html = document.createElement('p');
+    html.innerText = txt;
+    html.classList.add(uniqeID);
+    html.addEventListener('click', () => {
+        removeItem(uniqeID);
+    })
 
-
-const itemInputEle = document.getElementById("itemInput");
-const addToCratBtnEle = document.getElementById("addToCartBtn");
+    return html;
+}
 
 
 function printItems (){
@@ -23,9 +41,13 @@ function printItems (){
     if (item == ""){
         return;
     }
-    push(itemsInDB, item);
-    console.log(`${item} is add to cart`)
+    // push(shopingListAppDB, item);
+    const html = makeHTML(item);
+    itemsContainerEle.insertAdjacentElement('beforeend', html);
+    itemInputEle.value = "";
 }
+
+
 
 
 addToCratBtnEle.addEventListener("click", (e)=> {

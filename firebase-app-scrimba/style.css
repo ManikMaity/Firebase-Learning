@@ -10,14 +10,15 @@
 
 :root{
     --primary : #ffb548;
-    --secondary : #5d3327;
-    --bg-color : #fff;
+    --secondary : #5d3327aa;
+    --bg-color : #f4f4f4;
 }
 
 body{
     min-height: 100vh;
     display: grid;
     place-content: center;
+    background-color: var(--bg-color);
 }
 
 .main{
@@ -47,7 +48,7 @@ body{
     border-radius: 10px;
     border: none;
     background-color: #e9e9f3;
-    outline: none;
+    outline-color: var(--secondary);
 }
 
 .input-form #addToCartBtn{
@@ -62,6 +63,26 @@ body{
    opacity: 0.7;
 }
 
+.items-container{
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+.items-container p{
+    font-size: 1rem;
+    display: inline-block;
+    background-color: #ffffff;
+    padding: 10px 16px;
+    border-radius: 5px;
+    user-select: none;
+    cursor: pointer;
+    box-shadow: 0.8px 0.8px 3px #25252540;
+}
+
 @media screen and (max-width: 600px) {
     body{
         display: flex;
@@ -70,11 +91,11 @@ body{
     body .main{
        max-width: 100%;
        width: 100%;
-       margin-top: 20px;
        padding: 0;
+       margin: 0px 20px;
+       margin-top: 20px;
     }
     .input-form{
         width: 100%;
-        padding: 0 20px;
     }
 }

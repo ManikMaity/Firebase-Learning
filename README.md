@@ -56,4 +56,18 @@ import { getDatabase, ref, push } from 'https://www.gstatic.com/firebasejs/10.11
 - The item will be added under the refence name in firebase. We can see it in `Realtime Database`
 
 
+### Firebase rules solving 
+- According the firebase rules in test mode we cant read, write to database after 30 days.
+- To solve this `Realtime Database` option in firebase.
+- Go to `Rules` tab
+- And change the rules to this
+```js
+{
+  "rules": {
+    ".read": true,  
+    ".write": true, 
+  }
+}
+```
+
 ## [Firebase docs Link](https://shorturl.at/yUV47)
