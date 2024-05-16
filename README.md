@@ -70,4 +70,48 @@ import { getDatabase, ref, push } from 'https://www.gstatic.com/firebasejs/10.11
 }
 ```
 
+- Shortcut to open firebase console - just paste the databaseURL in broswer
+```js
+const appSettings = {
+    databaseURL : "https://cart-database-8618b-default-rtdb.firebaseio.com/",
+}
+```
+
+- To fetch data from the database use have to import and use onValue function it takes the Database ref and a function with snapshop. Inside snapshot our database value. Whenever we change, add or removed item from DB snapshot func will execute automatically.
+- We can get the array of obj with unique key and value of DB items by using `snapshot.val()`.
+- We use `snapshot.exists()` to chack is there is value in the database
+```js
+onValue(shopingListAppDB, (snapshot) => {
+    if (snapshot.exists()){
+        const allItems = Object.entries(snapshot.val())
+        itemsContainerEle.innerHTML = "";
+        allItems.map(([itemID, itemValue]) => {
+            let html = makeHTML(itemValue, itemID);
+            itemsContainerEle.insertAdjacentElement('beforeend', html);
+        })
+    }
+    else{
+        console.log('No Item avaiable')
+    }
+})
+```
+- To dalete items in the DB we have to import and use remove func.
+```js
+import {
+    getDatabase,
+    ref,
+    push,
+    onValue,
+    remove
+} from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js'
+```
+- firstly we get the exact location of the value in DB using ref.
+```js
+    let itemLocationInDB = ref(database, `shopingListApp/${uniqeID}`);
+```
+- Now we can use remove func to delete that value.
+```js
+    remove(itemLocationInDB);
+```
+
 ## [Firebase docs Link](https://shorturl.at/yUV47)

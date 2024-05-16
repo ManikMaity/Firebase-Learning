@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-family: "Rubik", sans-serif;
     font-optical-sizing: auto;
     color: #252525;
@@ -26,33 +26,34 @@ body{
     flex-direction: column;
     height: 100%;
     max-width: 400px;
+    user-select: none;
     align-items: center;
     text-align: center;
     padding: 15px;
 }
 
 .image img{
-    max-height: 150px;
+    max-height: 180px;
     object-fit: contain;
 }
 
 .input-form{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
 .input-form input{
     text-align: center;
-    padding: 10px 16px;
+    padding: 12px 18px;
     border-radius: 10px;
     border: none;
-    background-color: #e9e9f3;
+    background-color: #dfdfed;
     outline-color: var(--secondary);
 }
 
 .input-form #addToCartBtn{
-    padding: 10px 16px;
+    padding: 12px 18px;
     background-color: var(--primary);
     border-radius: 10px;
     border: none;
@@ -73,15 +74,59 @@ body{
 }
 
 .items-container p{
-    font-size: 1rem;
     display: inline-block;
     background-color: #ffffff;
+    flex-grow: 1;
     padding: 10px 16px;
     border-radius: 5px;
-    user-select: none;
     cursor: pointer;
     box-shadow: 0.8px 0.8px 3px #25252540;
 }
+
+.items-container p:hover{
+    background-color: #ffb64854;
+}
+
+@keyframes fromUp {
+    from {
+        top: -200px;
+    }
+    to{
+        top: 0px;
+    }
+}
+
+.alert{
+    position: absolute;
+    top: 0;
+    width: 95%;
+    background-color: #dfdfed;
+    border: 2px solid var(--secondary);
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    height: 60px;
+    border-radius: 8px;
+    margin: 5px 5px;
+    animation: fromUp 1s ease-in-out 1;
+}
+.alert div{
+    height: 100%;
+}
+
+.alert div button{
+    height: 100%;
+    padding: 0px 8px;
+}
+
+.show{
+    display: flex;
+}
+
+
+
+
 
 @media screen and (max-width: 600px) {
     body{
